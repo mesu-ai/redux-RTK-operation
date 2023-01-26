@@ -1,10 +1,12 @@
 import React from 'react';
-import { useAddPostDataMutation, useGetPostDataQuery } from '../services/serviceAPIs';
+import { useAddPostDataMutation, useDeletePostDataMutation, useGetPostDataQuery, useUpdatePostDataMutation } from '../services/serviceAPIs';
 
 const LandingPage = () => {
   const { data,isLoading } = useGetPostDataQuery();
   // eslint-disable-next-line no-undef
-  const [addPostData]=useAddPostDataMutation()
+  const [addPostData]=useAddPostDataMutation();
+  const [updatePostData]=useUpdatePostDataMutation();
+  const [deletePostData]=useDeletePostDataMutation();
 
   const handleAdd=async ()=>{
     console.log('add data');
@@ -22,13 +24,26 @@ const LandingPage = () => {
 
   }
 
-  const handleUpdate=(id)=>{
-    console.log({id})
+  const handleUpdate=async (id)=>{
+    console.log({id});
+
+    const updateData={
+      id: 101,
+      title: 'foo',
+      body: 'bar',
+      userId: 1
+    };
+
+    const response= await addPostData(updateData);
+    console.log(response);
+
 
   }
 
-  const handleDelete=(id)=>{
+  const handleDelete= async(id)=>{
     console.log({id})
+    const response=await deletePostData(id);
+    console.log(response);
 
   }
   
