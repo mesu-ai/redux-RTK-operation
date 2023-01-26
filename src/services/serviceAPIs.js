@@ -8,7 +8,15 @@ export const serviceAPIs = createApi({
     getPostData: builder.query({
       query: (name) => 'posts',
     }),
+    addPostData:builder.mutation({
+      query:(data)=>({
+        url:'posts',
+        method:'POST',
+        body:data
+      })
+    
+    }),
   }),
 })
 
-export const {useGetPostDataQuery}=serviceAPIs;
+export const {useGetPostDataQuery,useAddPostDataMutation}=serviceAPIs;
