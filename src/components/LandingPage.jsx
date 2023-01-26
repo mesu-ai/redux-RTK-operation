@@ -1,12 +1,24 @@
-import React from 'react';
-import { useAddPostDataMutation, useDeletePostDataMutation, useGetPostDataQuery, useUpdatePostDataMutation } from '../services/serviceAPIs';
+import React, { useState } from 'react';
+import { useAddPostDataMutation, useDeletePostDataMutation, useGetPostDataQuery, useGetSinglePostDataQuery, useUpdatePostDataMutation } from '../services/serviceAPIs';
 
 const LandingPage = () => {
+  const [dataId,setDataId]=useState('');
+  
+  
   const { data,isLoading } = useGetPostDataQuery();
-  // eslint-disable-next-line no-undef
+ 
+  const {data:singleData}=useGetSinglePostDataQuery(dataId,{skip: !dataId});
+ 
   const [addPostData]=useAddPostDataMutation();
   const [updatePostData]=useUpdatePostDataMutation();
   const [deletePostData]=useDeletePostDataMutation();
+
+
+  const handleDetails=async(id)=>{
+    setDataId(id);
+    console.log(singleData);
+
+  }
 
   const handleAdd=async ()=>{
     console.log('add data');
@@ -34,7 +46,7 @@ const LandingPage = () => {
       userId: 1
     };
 
-    const response= await addPostData(updateData);
+    const response= await updatePostData(updateData);
     console.log(response);
 
 
@@ -47,8 +59,7 @@ const LandingPage = () => {
 
   }
   
-
-  
+ 
 
   return (
     <div>
@@ -67,6 +78,7 @@ const LandingPage = () => {
               style={{ listStyleType: 'none' }}
             >
               <li>{item?.title}</li>
+              <button onClick={()=>handleDetails(item?.id)} type='button'>Details</button>
               <button onClick={()=>handleUpdate(item?.id)} type='button'>Update</button>
               <button onClick={()=>handleDelete(item?.id)} type='button'>Delete</button>
             </ul>

@@ -11,6 +11,13 @@ export const serviceAPIs = createApi({
       providesTags:['Post']
     }),
 
+    getSinglePostData: builder.query({
+      query:(id)=>`posts/${id}`,
+      providesTags:['Post'],
+      
+
+    }),
+
     addPostData:builder.mutation({
       query:(data)=>({
         url:'posts',
@@ -40,4 +47,4 @@ export const serviceAPIs = createApi({
   }),
 })
 
-export const {useGetPostDataQuery,useAddPostDataMutation, useUpdatePostDataMutation,useDeletePostDataMutation}=serviceAPIs;
+export const {useGetPostDataQuery,useGetSinglePostDataQuery, useAddPostDataMutation, useUpdatePostDataMutation,useDeletePostDataMutation}=serviceAPIs;
