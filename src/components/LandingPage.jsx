@@ -9,7 +9,7 @@ const LandingPage = () => {
  
   const {data:singleData}=useGetSinglePostDataQuery(dataId,{skip: !dataId});
  
-  const [addPostData]=useAddPostDataMutation();
+  const [addPostData, {isLoading:addLoading}]=useAddPostDataMutation();
   const [updatePostData]=useUpdatePostDataMutation();
   const [deletePostData]=useDeletePostDataMutation();
 
@@ -33,7 +33,6 @@ const LandingPage = () => {
     const response= await addPostData(addData);
     console.log(response);
 
-
   }
 
   const handleUpdate=async (id)=>{
@@ -49,7 +48,6 @@ const LandingPage = () => {
     const response= await updatePostData(updateData);
     console.log(response);
 
-
   }
 
   const handleDelete= async(id)=>{
@@ -60,7 +58,6 @@ const LandingPage = () => {
   }
   
  
-
   return (
     <div>
       <h2>Redux RTK query Crud Opperation</h2>
