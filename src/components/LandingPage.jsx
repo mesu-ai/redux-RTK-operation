@@ -40,7 +40,7 @@ const LandingPage = () => {
     console.log({id});
 
     const updateData={
-      id: 101,
+      id: id,
       title: 'foo',
       body: 'bar',
       userId: 1
